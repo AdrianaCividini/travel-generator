@@ -1,13 +1,29 @@
-function generateCountry(event) {
-  event.preventDefault();
-  let travelElement = document.querySelector("#travel");
+function displayCountry(response) {
+  console.log("country generatated");
 
   new Typewriter("#travel", {
-    strings: "Italy, England",
+    strings: response.data.answer,
     autoStart: true,
     delay: 30,
     cursor: "",
   });
+}
+
+function generateCountry(event) {
+  event.preventDefault();
+
+  let instructionsInput = document.querySelector("#user-instructions");
+  let apiKey = "be4f04372f126ocaa2t8a5df316fc3ab";
+  let context =
+    "You are a very active person and want to travel to different country and practice the most popular sport in that country. Make sure to get the user country.";
+  let prompt = `User instructions: Please generate witch is the most popular sport in this country ${instructionsInput.value} . Please give a short answer about the popular sport.`;
+  let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
+
+  console.log("Generating country");
+  console.log(`Prompt: ${prompt}`);
+  console.log(`Context: ${context}`);
+
+  axios.get(apiUrl).then(displayCountry);
 }
 
 let travelFormElement = document.querySelector("#travel-generate-form");

@@ -19,9 +19,9 @@ function generateCountry(event) {
   let prompt = `User instructions: Please generate witch is the most popular sport in this country ${instructionsInput.value} . Please give a short answer about the popular sport.`;
   let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-  console.log("Generating country");
-  console.log(`Prompt: ${prompt}`);
-  console.log(`Context: ${context}`);
+  let travelElement = document.querySelector("#travel");
+  travelElement.classList.remove("hidden");
+  travelElement.innerHTML = `<div class="blink"> ⚽️ Generating the most popular Sport in ${instructionsInput.value}</div>`;
 
   axios.get(apiUrl).then(displayCountry);
 }
